@@ -86,7 +86,7 @@ stream_t monistr;                       // monitor stream
 
 // show message in message area ---------------------------------------------
 extern "C" {
-    extern int showmsg(const char *, ...)
+    extern int showmsg(char *, ...)
     {
         return 0;
     }

@@ -30,7 +30,7 @@ static char buff[MAXSRCTBL];                            // source table buffer
 MainForm *mainForm;
 
 extern "C" {
-extern int showmsg(const char *, ...)  {return 0;}
+extern int showmsg(char *, ...)  {return 0;}
 extern void settime(gtime_t) {}
 extern void settspan(gtime_t, gtime_t) {}
 }

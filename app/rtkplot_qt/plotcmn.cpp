@@ -18,7 +18,7 @@ QString color2String(const QColor &c)
 
 //---------------------------------------------------------------------------
 extern "C" {
-int showmsg(const char *format, ...)
+int showmsg(char *format, ...)
 {
     Q_UNUSED(format); return 0;
 }

@@ -62,7 +62,7 @@ MainForm *mainForm;
 
 // show message in message area ---------------------------------------------
 extern "C" {
-    extern int showmsg(const char *format, ...)
+    extern int showmsg(char *format, ...)
     {
         va_list arg;
         QString str;
