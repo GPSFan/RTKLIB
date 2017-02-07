@@ -284,6 +284,8 @@ static int decode_rxmrawx(raw_t *raw)
             continue;
         }
         prstd=U1(p+27)&15; /* pseudorange std-dev */
+        prstd=1<<(prstd>=5?prstd-5:0); /* prstd=2^(x-5) */
+        prstd=prstd<=9?prstd:9;  /* limit to 9 to fit RINEX format */
         cpstd=U1(p+28)&15; /* carrier-phase std-dev */
         tstat=U1(p+30); /* tracking status */
         pr1=tstat&1?R8(p  ):0.0;
@@ -298,7 +300,7 @@ static int decode_rxmrawx(raw_t *raw)
         raw->obs.data[n].qualP[0]=prstd;
         
         /* offset by time tag adjustment */
-        if (toff!=0.0) {
+        if (toff!=0.0&&cp1!=0) {
             fcn=(int)U1(p+23)-7;
             freq=sys==SYS_CMP?FREQ1_CMP:
                  (sys==SYS_GLO?FREQ1_GLO+DFRQ1_GLO*fcn:FREQ1);
