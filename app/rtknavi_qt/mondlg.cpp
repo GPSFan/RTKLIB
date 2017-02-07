@@ -355,8 +355,8 @@ void MonitorDialog::ShowRtk(void)
     QString exsats, navsys = "";
     const QString svrstate[] = { tr("Stop"), tr("Run") };
     const QString sol[] = { tr("-"), tr("Fix"), tr("Float"), tr("SBAS"), tr("DGPS"), tr("Single"), tr("PPP"), "" };
-    const QString mode[] = { tr("Single"), tr("DGPS"),	      tr("Kinematic"),	tr("Static"), tr("Moving-Base"),
-               tr("Fixed"),	 tr("PPP-Kinematic"), tr("PPP-Static"), "" };
+    const QString mode[] = { tr("Single"), tr("DGPS"), tr("Kinematic"), tr("Static"), tr("Static-Start"), tr("Moving-Base"),
+               tr("Fixed"), tr("PPP-Kinematic"), tr("PPP-Static"), "" };
     const QString freq[] = { tr("-"), tr("L1"), tr("L1+L2"), tr("L1+L2+L5"), tr("L1+L2+L5+L6"), tr("L1+L2+L5+L6+L7"), tr("L1+L2+L5+L6+L7+L8"), "" };
     double *del, *off1, *off2, rt[3] = { 0 }, dop[4] = { 0 };
     double azel[MAXSAT * 2], pos[3], vel[3];
