@@ -8,12 +8,20 @@ QT       -= core gui
 
 TARGET = RTKLib
 TEMPLATE = lib
-CONFIG += staticlib
+
+DEFINES -= UNICODE TRACE
 
 include(../RTKLib.pri)
 
-QMAKE_CFLAGS += -Wall -ansi -pedantic -Wno-unused-but-set-variable  -DTRACE -g
-DEFINES -= UNICODE
+*g++* {
+    QMAKE_CFLAGS += -Wall -ansi -pedantic -Wno-unused-but-set-variable -g
+}
+
+win* {
+    CONFIG += staticlib
+}
+
+DESTDIR = ../lib
 
 SOURCES += rtkcmn.c \
     convkml.c \
