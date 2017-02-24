@@ -2376,6 +2376,9 @@ void MainWindow::LoadOpt(void)
     PrcOpt.armaxiter = settings.value("prcopt/ariter", 1).toInt();
     PrcOpt.minfixsats = settings.value("prcopt/minfixsats", 2).toInt();
     PrcOpt.minholdsats = settings.value("prcopt/minholdsats",   2).toInt();
+
+    PrcOpt.mindropsats = settings.value("prcopt/mindropsats",  20).toInt();
+
     PrcOpt.niter = settings.value("prcopt/niter", 1).toInt();
     PrcOpt.eratio[0] = settings.value("prcopt/eratio0", 100.0).toDouble();
     PrcOpt.eratio[1] = settings.value("prcopt/eratio1", 100.0).toDouble();
@@ -2397,8 +2400,15 @@ void MainWindow::LoadOpt(void)
     PrcOpt.maxtdiff = settings.value("prcopt/maxtdiff", 30.0).toDouble();
     PrcOpt.maxgdop = settings.value("prcopt/maxgdop", 30.0).toDouble();
     PrcOpt.maxinno = settings.value("prcopt/maxinno", 30.0).toDouble();
+
+    PrcOpt.varholdamb = settings.value("prcopt/varholdamb", 0.001).toDouble();
+    PrcOpt.gainholdamb = settings.value("prcopt/gainholdamb", 0.01).toDouble();
+
     PrcOpt.syncsol = settings.value("prcopt/syncsol", 0).toInt();
     PrcOpt.arfilter = settings.value("prcopt/arfilter", 0).toInt();
+
+    PrcOpt.rcvstds = settings.value("prcopt/rcvstds", 0).toInt();
+
     ExSats = settings.value("prcopt/exsats", "").toString();
     PrcOpt.navsys = settings.value("prcopt/navsys", SYS_GPS).toInt();
     PrcOpt.posopt[0] = settings.value("prcopt/posopt1", 0).toInt();
@@ -2587,6 +2597,9 @@ void MainWindow::SaveOpt(void)
     settings.setValue("prcopt/ariter", PrcOpt.armaxiter);
     settings.setValue("prcopt/minfixsats", PrcOpt.minfixsats);
     settings.setValue("prcopt/minholdsats",PrcOpt.minholdsats);
+
+    settings.setValue("prcopt/mindropsats",PrcOpt.mindropsats);
+
     settings.setValue("prcopt/niter", PrcOpt.niter);
     settings.setValue("prcopt/eratio0", PrcOpt.eratio[0]);
     settings.setValue("prcopt/eratio1", PrcOpt.eratio[1]);
@@ -2608,8 +2621,15 @@ void MainWindow::SaveOpt(void)
     settings.setValue("prcopt/maxtdiff", PrcOpt.maxtdiff);
     settings.setValue("prcopt/maxgdop", PrcOpt.maxgdop);
     settings.setValue("prcopt/maxinno", PrcOpt.maxinno);
+
+    settings.setValue("prcopt/varholdamb", PrcOpt.varholdamb);
+    settings.setValue("prcopt/gainholdamb", PrcOpt.gainholdamb);
+
     settings.setValue("prcopt/syncsol", PrcOpt.syncsol);
     settings.setValue("prcopt/arfilter", PrcOpt.arfilter);
+
+    settings.setValue("prcopt/rcvstds", PrcOpt.rcvstds);
+
     settings.setValue("prcopt/exsats", ExSats);
     settings.setValue("prcopt/navsys", PrcOpt.navsys);
     settings.setValue("prcopt/posopt1", PrcOpt.posopt[0]);

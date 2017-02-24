@@ -468,12 +468,22 @@ void OptDialog::GetOpt(void)
     MaxAgeDiff->setValue(PrcOpt.maxtdiff);
     RejectGdop->setValue(PrcOpt.maxgdop);
     RejectThres->setValue(PrcOpt.maxinno);
+
+    VarHoldAmb->setValue(PrcOpt.varholdamb);
+    GainHoldAmb->setValue(PrcOpt.gainholdamb);
+
     SlipThres->setValue(PrcOpt.thresslip);
     NumIter->setValue(PrcOpt.niter);
     MinFixSats->setValue(PrcOpt.minfixsats);
     MinHoldSats->setValue(PrcOpt.minholdsats);
+
+    MinDropSats->setValue(PrcOpt.mindropsats);
+
     SyncSol->setCurrentIndex(PrcOpt.syncsol);
     ARFilter->setCurrentIndex(PrcOpt.arfilter);
+
+    RcvStds->setCurrentIndex(PrcOpt.rcvstds);
+
     ExSatsE->setText(ExSats);
     NavSys1->setChecked(PrcOpt.navsys & SYS_GPS);
     NavSys2->setChecked(PrcOpt.navsys & SYS_GLO);
@@ -598,14 +608,24 @@ void OptDialog::SetOpt(void)
     PrcOpt.maxtdiff = MaxAgeDiff->value();
     PrcOpt.maxgdop = RejectGdop->value();
     PrcOpt.maxinno = RejectThres->value();
+
+    PrcOpt.varholdamb = VarHoldAmb->value();
+    PrcOpt.gainholdamb = GainHoldAmb->value();
+
     PrcOpt.thresslip = SlipThres->value();
     PrcOpt.niter = NumIter->value();
     PrcOpt.minfixsats =MinFixSats->value();
     PrcOpt.minholdsats =MinHoldSats->value();
+
+    PrcOpt.mindropsats =MinDropSats->value();
+
     PrcOpt.thresar[1] =ARThres1->value();
     PrcOpt.niter     =NumIter->value();
     PrcOpt.syncsol = SyncSol->currentIndex();
     PrcOpt.arfilter  =ARFilter->currentIndex();
+
+    PrcOpt.rcvstds  =RcvStds->currentIndex();
+
     ExSats = ExSatsE->text();
     PrcOpt.navsys = 0;
 
@@ -789,12 +809,22 @@ void OptDialog::LoadOpt(const QString &file)
     MaxAgeDiff->setValue(prcopt.maxtdiff);
     RejectGdop->setValue(prcopt.maxgdop);
     RejectThres->setValue(prcopt.maxinno);
+
+    VarHoldAmb->setValue(prcopt.varholdamb);
+    GainHoldAmb->setValue(prcopt.gainholdamb);
+
     SlipThres->setValue(prcopt.thresslip);
     MinFixSats->setValue(prcopt.minfixsats);
     MinHoldSats->setValue(prcopt.minholdsats);
+
+    MinDropSats->setValue(prcopt.mindropsats);
+
     NumIter->setValue(prcopt.niter);
     SyncSol->setCurrentIndex(prcopt.syncsol);
     ARFilter->setCurrentIndex(prcopt.arfilter);
+
+    RcvStds->setCurrentIndex(prcopt.rcvstds);
+
     BaselineLen->setValue(prcopt.baseline[0]);
     BaselineSig->setValue(prcopt.baseline[1]);
     BaselineConst->setChecked(prcopt.baseline[0] > 0.0);
@@ -1010,13 +1040,23 @@ void OptDialog::SaveOpt(const QString &file)
     prcopt.maxtdiff = MaxAgeDiff->value();
     prcopt.maxgdop = RejectGdop->value();
     prcopt.maxinno = RejectThres->value();
+
+    prcopt.varholdamb = VarHoldAmb->value();
+    prcopt.gainholdamb = GainHoldAmb->value();
+
     prcopt.thresslip = SlipThres->value();
     prcopt.niter = NumIter->value();
     prcopt.minfixsats = MinFixSats->value();
     prcopt.minholdsats = MinHoldSats->value();
+
+    prcopt.mindropsats = MinDropSats->value();
+
     prcopt.niter = NumIter->value();
     prcopt.syncsol = SyncSol->currentIndex();
     prcopt.arfilter	= ARFilter->currentIndex();
+
+    prcopt.rcvstds	= RcvStds->currentIndex();
+
     if (prcopt.mode == PMODE_MOVEB && BaselineConst->isChecked()) {
         prcopt.baseline[0] = BaselineLen->value();
         prcopt.baseline[1] = BaselineSig->value();
@@ -1116,12 +1156,22 @@ void OptDialog::UpdateEnable(void)
     SlipThres->setEnabled(ar || ppp);
     MaxAgeDiff->setEnabled(rel);
     RejectThres->setEnabled(rel || ppp);
+
+    VarHoldAmb->setEnabled(ar && AmbRes->currentIndex() == 3);
+    GainHoldAmb->setEnabled(ar && AmbRes->currentIndex() == 3);
+
     MinFixSats->setEnabled(ar || ppp);
     MinHoldSats->setEnabled(ar || ppp);
+
+    MinDropSats->setEnabled(ar || ppp);
+
     ARThres1->setEnabled(ar || ppp);
     NumIter->setEnabled(rel || ppp);
     SyncSol->setEnabled(rel || ppp);
     ARFilter->setEnabled(ar || ppp);
+
+    RcvStds->setEnabled(rel);
+
     BaselineConst->setEnabled(PosMode->currentIndex() == PMODE_MOVEB);
     BaselineLen->setEnabled(BaselineConst->isChecked() && PosMode->currentIndex() == PMODE_MOVEB);
     BaselineSig->setEnabled(BaselineConst->isChecked() && PosMode->currentIndex() == PMODE_MOVEB);
