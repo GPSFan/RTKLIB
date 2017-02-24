@@ -921,7 +921,9 @@ int MainForm::GetOption(prcopt_t &prcopt, solopt_t &solopt,
     prcopt.niter    =NumIter;
     prcopt.minfixsats = MinFixSats;
     prcopt.minholdsats = MinHoldSats;
+    prcopt.mindropsats = MinDropSats;
     prcopt.arfilter = ARFilter;
+    prcopt.rcvstds = RcvStds;
     prcopt.intpref  =IntpRefObs;
     prcopt.sbassatsel=SbasSat;
     prcopt.eratio[0]=MeasErrR1;
@@ -948,6 +950,10 @@ int MainForm::GetOption(prcopt_t &prcopt, solopt_t &solopt,
     prcopt.maxtdiff =MaxAgeDiff;
     prcopt.maxgdop  =RejectGdop;
     prcopt.maxinno  =RejectThres;
+
+    prcopt.varholdamb  =VarHoldAmb;
+    prcopt.gainholdamb  =GainHoldAmb;
+
     prcopt.outsingle=OutputSingle;
     if (BaseLineConst) {
         prcopt.baseline[0]=BaseLine[0];
@@ -1265,13 +1271,23 @@ void MainForm::LoadOpt(void)
     SlipThres          =ini.value  ("opt/slipthres",   0.05).toDouble();
     MaxAgeDiff         =ini.value  ("opt/maxagediff",  30.0).toDouble();
     RejectThres        =ini.value  ("opt/rejectthres", 30.0).toDouble();
+
+    VarHoldAmb         =ini.value  ("opt/varholdamb", 0.001).toDouble();
+    GainHoldAmb        =ini.value  ("opt/gainholdamb", 0.01).toDouble();
+
     RejectGdop         =ini.value  ("opt/rejectgdop",  30.0).toDouble();
     ARIter             =ini.value("opt/ariter",         1).toInt();
     NumIter            =ini.value("opt/numiter",        1).toInt();
     MinFixSats         =ini.value("opt/minfixsats",     2).toInt();
     MinHoldSats        =ini.value("opt/minholdsats",    2).toInt();
+
+    MinDropSats        =ini.value("opt/mindropsats",   20).toInt();
+
     MaxPosVarAR        =ini.value("opt/maxposvarar", 0.99).toFloat();
     ARFilter           =ini.value("opt/arfilter",       0).toInt();
+
+    RcvStds            =ini.value("opt/rcvstds",       0).toInt();
+
     CodeSmooth         =ini.value("opt/codesmooth",     0).toInt();
     BaseLine[0]        =ini.value  ("opt/baselinelen",  0.0).toDouble();
     BaseLine[1]        =ini.value  ("opt/baselinesig",  0.0).toDouble();
@@ -1473,12 +1489,22 @@ void MainForm::SaveOpt(void)
     ini.setValue  ("opt/maxagediff",  MaxAgeDiff  );
     ini.setValue  ("opt/rejectgdop",  RejectGdop  );
     ini.setValue  ("opt/rejectthres", RejectThres );
+
+    ini.setValue  ("opt/varholdamb", VarHoldAmb );
+    ini.setValue  ("opt/gainholdamb", GainHoldAmb );
+
     ini.setValue("opt/ariter",      ARIter      );
     ini.setValue("opt/numiter",     NumIter     );
     ini.setValue("opt/minfixsats",  MinFixSats  );
     ini.setValue("opt/minholdsats", MinHoldSats );
+
+    ini.setValue("opt/mindropsats", MinDropSats );
+
     ini.setValue("opt/maxposvarar", MaxPosVarAR );
     ini.setValue("opt/arfilter",    ARFilter    );
+
+    ini.setValue("opt/rcvstds",    RcvStds    );
+
     ini.setValue("opt/codesmooth",  CodeSmooth  );
     ini.setValue  ("opt/baselinelen", BaseLine[0] );
     ini.setValue  ("opt/baselinesig", BaseLine[1] );

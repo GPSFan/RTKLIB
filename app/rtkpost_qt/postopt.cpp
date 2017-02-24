@@ -459,12 +459,22 @@ void OptDialog::GetOpt(void)
     MaxAgeDiff->setValue(mainForm->MaxAgeDiff);
     RejectGdop->setValue(mainForm->RejectGdop);
     RejectThres->setValue(mainForm->RejectThres);
+
+    VarHoldAmb->setValue(mainForm->VarHoldAmb);
+    GainHoldAmb->setValue(mainForm->GainHoldAmb);
+
     SlipThres->setValue(mainForm->SlipThres);
     ARIter->setValue(mainForm->ARIter);
     MinFixSats->setValue(mainForm->MinFixSats);
     MinHoldSats->setValue(mainForm->MinHoldSats);
+
+    MinDropSats->setValue(mainForm->MinDropSats);
+
     MaxPosVarAR->setValue(mainForm->MaxPosVarAR);
     ARFilter->setCurrentIndex(mainForm->ARFilter);
+
+    RcvStds->setCurrentIndex(mainForm->RcvStds);
+
     NumIter->setValue(mainForm->NumIter);
     BaselineLen->setValue(mainForm->BaseLine[0]);
     BaselineSig->setValue(mainForm->BaseLine[1]);
@@ -588,12 +598,22 @@ void OptDialog::SetOpt(void)
     mainForm->MaxAgeDiff = MaxAgeDiff->value();
     mainForm->RejectGdop = RejectGdop->value();
     mainForm->RejectThres = RejectThres->value();
+
+    mainForm->VarHoldAmb = VarHoldAmb->value();
+    mainForm->GainHoldAmb = GainHoldAmb->value();
+
     mainForm->SlipThres = SlipThres->value();
     mainForm->ARIter = ARIter->value();
     mainForm->NumIter = NumIter->value();
     mainForm->MinFixSats = MinFixSats->value();
     mainForm->MinHoldSats = MinHoldSats->value();
+
+    mainForm->MinDropSats = MinDropSats->value();
+
     mainForm->ARFilter = ARFilter->currentIndex();
+
+    mainForm->RcvStds = RcvStds->currentIndex();
+
     mainForm->MaxPosVarAR = MaxPosVarAR->value();
     mainForm->BaseLine[0] = BaselineLen->value();
     mainForm->BaseLine[1] = BaselineSig->value();
@@ -732,11 +752,21 @@ void OptDialog::LoadOpt(const QString &file)
     MaxAgeDiff->setValue(prcopt.maxtdiff);
     RejectGdop->setValue(prcopt.maxgdop);
     RejectThres->setValue(prcopt.maxinno);
+
+    VarHoldAmb->setValue(prcopt.varholdamb);
+    GainHoldAmb->setValue(prcopt.gainholdamb);
+
     SlipThres->setValue(prcopt.thresslip);
     ARIter->setValue(prcopt.armaxiter);
     MinFixSats ->setValue(prcopt.minfixsats);
     MinHoldSats ->setValue(prcopt.minholdsats);
+
+    MinDropSats ->setValue(prcopt.mindropsats);
+
     ARFilter ->setCurrentIndex(prcopt.arfilter);
+
+    RcvStds ->setCurrentIndex(prcopt.rcvstds);
+
     NumIter->setValue(prcopt.niter);
     BaselineLen->setValue(prcopt.baseline[0]);
     BaselineSig->setValue(prcopt.baseline[1]);
@@ -889,11 +919,21 @@ void OptDialog::SaveOpt(const QString &file)
     prcopt.maxtdiff = MaxAgeDiff->value();
     prcopt.maxgdop = RejectGdop->value();
     prcopt.maxinno = RejectThres->value();
+
+    prcopt.varholdamb = VarHoldAmb->value();
+    prcopt.gainholdamb = GainHoldAmb->value();
+
     prcopt.thresslip = SlipThres->value();
     prcopt.armaxiter = ARIter->value();
     prcopt.minfixsats = MinFixSats->value();
     prcopt.minholdsats = MinHoldSats->value();
+
+    prcopt.mindropsats = MinDropSats->value();
+
     prcopt.arfilter	= ARFilter->currentIndex();
+
+    prcopt.rcvstds	= RcvStds->currentIndex();
+
     prcopt.niter = NumIter->value();
     if (prcopt.mode == PMODE_MOVEB && BaselineConst->isChecked()) {
         prcopt.baseline[0] = BaselineLen->value();
@@ -998,12 +1038,22 @@ void OptDialog::UpdateEnable(void)
     SlipThres->setEnabled(rtk || ppp);
     MaxAgeDiff->setEnabled(rel);
     RejectThres->setEnabled(rel || ppp);
+
+    VarHoldAmb->setEnabled(ar);
+    GainHoldAmb->setEnabled(ar && AmbRes->currentIndex() == 3);
+
     ARIter->setEnabled(ppp);
     NumIter->setEnabled(rel || ppp);
     MinFixSats->setEnabled(ar);
     MinHoldSats->setEnabled(ar);
+
+    MinDropSats->setEnabled(rel);
+
     MaxPosVarAR->setEnabled(ar && !ppp);
     ARFilter->setEnabled(ar);
+
+    RcvStds->setEnabled(rel);
+
     BaselineConst->setEnabled(PosMode->currentIndex() == PMODE_MOVEB);
     BaselineLen->setEnabled(BaselineConst->isChecked() && PosMode->currentIndex() == PMODE_MOVEB);
     BaselineSig->setEnabled(BaselineConst->isChecked() && PosMode->currentIndex() == PMODE_MOVEB);
