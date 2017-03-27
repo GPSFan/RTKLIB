@@ -26,7 +26,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="TabSheet1">
       <property name="toolTip">
@@ -708,6 +708,13 @@
        <string>Setting&amp;2</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="11" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Hold Amb Var / Hold Amb Gain</string>
+         </property>
+        </widget>
+       </item>
        <item row="5" column="0">
         <widget class="QLabel" name="Label49">
          <property name="text">
@@ -735,7 +742,7 @@
          </property>
         </widget>
        </item>
-       <item row="17" column="1" colspan="2">
+       <item row="19" column="1" colspan="2">
         <widget class="QSpinBox" name="NumIter">
          <property name="value">
           <number>1</number>
@@ -749,7 +756,7 @@
          </property>
         </widget>
        </item>
-       <item row="18" column="3" colspan="2">
+       <item row="20" column="3" colspan="2">
         <widget class="QDoubleSpinBox" name="BaselineSig">
          <property name="suffix">
           <string> m</string>
@@ -769,7 +776,7 @@
          </property>
         </widget>
        </item>
-       <item row="18" column="1" colspan="2">
+       <item row="20" column="1" colspan="2">
         <widget class="QDoubleSpinBox" name="BaselineLen">
          <property name="suffix">
           <string> m</string>
@@ -821,7 +828,7 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="1" colspan="2">
+       <item row="15" column="1" colspan="2">
         <widget class="QDoubleSpinBox" name="MaxAgeDiff">
          <property name="suffix">
           <string> s</string>
@@ -969,7 +976,7 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="1" colspan="2">
+       <item row="13" column="1" colspan="2">
         <widget class="QSpinBox" name="OutCntResetAmb">
          <property name="maximum">
           <number>1000</number>
@@ -992,7 +999,7 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="13" column="0">
         <widget class="QLabel" name="Label22">
          <property name="enabled">
           <bool>true</bool>
@@ -1005,7 +1012,7 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="15" column="0">
         <widget class="QLabel" name="Label14">
          <property name="enabled">
           <bool>true</bool>
@@ -1018,7 +1025,7 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="3" colspan="2">
+       <item row="15" column="3" colspan="2">
         <widget class="QComboBox" name="SyncSol">
          <property name="enabled">
           <bool>true</bool>
@@ -1038,33 +1045,7 @@
          </item>
         </widget>
        </item>
-       <item row="15" column="0">
-        <widget class="QLabel" name="Label11">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="text">
-          <string>Reject Threshold of GDOP/Innov</string>
-         </property>
-        </widget>
-       </item>
-       <item row="17" column="0">
-        <widget class="QLabel" name="Label37">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="text">
-          <string>Number of Filter Iteration</string>
-         </property>
-        </widget>
-       </item>
-       <item row="18" column="0">
+       <item row="20" column="0">
         <widget class="QCheckBox" name="BaselineConst">
          <property name="toolTip">
           <string/>
@@ -1077,20 +1058,33 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="1" colspan="2">
-        <widget class="QDoubleSpinBox" name="RejectGdop">
-         <property name="suffix">
-          <string> m</string>
+       <item row="17" column="0">
+        <widget class="QLabel" name="Label11">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
-         <property name="decimals">
-          <number>1</number>
+         <property name="toolTip">
+          <string/>
          </property>
-         <property name="value">
-          <double>30.000000000000000</double>
+         <property name="text">
+          <string>Reject Threshold of GDOP/Innov</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="3" colspan="2">
+       <item row="19" column="0">
+        <widget class="QLabel" name="Label37">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="text">
+          <string>Number of Filter Iteration</string>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="3" colspan="2">
         <widget class="QDoubleSpinBox" name="RejectThres">
          <property name="suffix">
           <string> m</string>
@@ -1103,16 +1097,16 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="3" colspan="2">
-        <widget class="QDoubleSpinBox" name="SlipThres">
+       <item row="17" column="1" colspan="2">
+        <widget class="QDoubleSpinBox" name="RejectGdop">
          <property name="suffix">
           <string> m</string>
          </property>
          <property name="decimals">
-          <number>3</number>
+          <number>1</number>
          </property>
          <property name="value">
-          <double>0.050000000000000</double>
+          <double>30.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -1127,6 +1121,19 @@
         <widget class="QSpinBox" name="MinFixSats">
          <property name="value">
           <number>3</number>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="3" colspan="2">
+        <widget class="QDoubleSpinBox" name="SlipThres">
+         <property name="suffix">
+          <string> m</string>
+         </property>
+         <property name="decimals">
+          <number>3</number>
+         </property>
+         <property name="value">
+          <double>0.050000000000000</double>
          </property>
         </widget>
        </item>
@@ -1165,6 +1172,78 @@
            <string>ON</string>
           </property>
          </item>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Min Drop Sats / Use Rcv StdDevs</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1" colspan="2">
+        <widget class="QSpinBox" name="MinDropSats">
+         <property name="value">
+          <number>15</number>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1" colspan="2">
+        <widget class="QDoubleSpinBox" name="VarHoldAmb">
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.001000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="3" colspan="2">
+        <widget class="QComboBox" name="RcvStds">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="currentText">
+          <string>OFF</string>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>OFF</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ON</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="11" column="3" colspan="2">
+        <widget class="QDoubleSpinBox" name="GainHoldAmb">
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.001000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.010000000000000</double>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1984,7 +2063,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="../rtkvideo_qt/rtkvideo_qt.qrc">
+             <iconset resource="../rtkconv_qt/rtkconv_qt.qrc">
               <normaloff>:/buttons/doc.bmp</normaloff>:/buttons/doc.bmp</iconset>
             </property>
             <property name="flat">
@@ -2481,7 +2560,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../rtkvideo_qt/rtkvideo_qt.qrc">
+          <iconset resource="../rtkconv_qt/rtkconv_qt.qrc">
            <normaloff>:/buttons/doc.bmp</normaloff>:/buttons/doc.bmp</iconset>
          </property>
          <property name="flat">
@@ -2698,7 +2777,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../rtkvideo_qt/rtkvideo_qt.qrc">
+          <iconset resource="../rtkconv_qt/rtkconv_qt.qrc">
            <normaloff>:/buttons/doc.bmp</normaloff>:/buttons/doc.bmp</iconset>
          </property>
          <property name="flat">
@@ -3459,7 +3538,7 @@
   <tabstop>BtnSave</tabstop>
  </tabstops>
  <resources>
-  <include location="../rtkvideo_qt/rtkvideo_qt.qrc"/>
+  <include location="../rtkconv_qt/rtkconv_qt.qrc"/>
  </resources>
  <connections/>
 </ui>
