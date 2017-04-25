@@ -419,7 +419,7 @@ static double varerr(int sat, int sys, double el, double bl, double dt, int f,
         if (sys==SYS_SBS) {a*=EFACT_SBS; b*=EFACT_SBS;}
     }
     else { /* normal error model */
-        if (opt->rcvstds) {
+        if (opt->rcvstds&& obs->qualL[f]!='\0'&&obs->qualP[f-nf]!='\0') {
             /* include err ratio and measurement std (P or L) from receiver */
             if (f>=nf) fact=opt->eratio[f-nf]*obs->qualP[f-nf];
             else fact=obs->qualL[f];
@@ -1892,8 +1892,9 @@ static int relpos(rtk_t *rtk, const obsd_t *obs, int nu, int nr,
 
     /* init satellite status arrays */
     for (i=0;i<MAXSAT;i++) {
-        rtk->ssat[i].sys=satsys(i+1,NULL);                                  /* gps system */
-        for (j=0;j<NFREQ;j++) rtk->ssat[i].vsat[j]=rtk->ssat[i].snr[j]=0;   /* valid satellite */
+        rtk->ssat[i].sys=satsys(i+1,NULL);                /* gps system */
+        for (j=0;j<NFREQ;j++) rtk->ssat[i].vsat[j]=0;     /* valid satellite */
+        for (j=1;j<NFREQ;j++) rtk->ssat[i].snr [j]=0;
     }
     /* compute satellite positions, velocities and clocks */
     satposs(time,obs,n,nav,opt->sateph,rs,dts,var,svh);
