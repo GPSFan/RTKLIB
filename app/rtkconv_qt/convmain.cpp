@@ -548,7 +548,7 @@ void MainWindow::BtnInFileViewClick()
         (ext.at(2) == 'g') || (ext.at(2) == 'G') || (ext.at(2) == 'h') ||
         (ext.at(2) == 'H') || (ext.at(2) == 'q') || (ext.at(2) == 'Q') ||
         (ext.at(2) == 'l') || (ext.at(2) == 'L') || (ext.at(2) == 'c') ||
-        (ext.at(2) == 'C')) {
+        (ext.at(2) == 'C') || (ext.at(2) == 'i') || (ext.at(2) == 'I')) {
         viewer->show();
         viewer->Read(RepPath(InFile_Text));
     }
@@ -872,7 +872,7 @@ void MainWindow::ConvertFile(void)
     if (OutFile9->isEnabled() && OutFileEna9->isChecked()) strcpy(conversionThread->ofile[8], qPrintable(OutFile9_Text));
 
     // check overwrite output file
-    for (i = 0; i < 9; i++) {
+    for (i = 0; i < 8; i++) {
         if (!QFile(conversionThread->ofile[i]).exists()) continue;
         if (QMessageBox::question(this, tr("Overwrite"), QString(tr("%1 exists. Do you want to overwrite?")).arg(conversionThread->ofile[i])) != QMessageBox::Yes) return;
     }
