@@ -537,11 +537,15 @@ static double getSigFreq(int _signType, int freqNo){
     case 11:                                                       /* GLOL2CA */
         return FREQ2_GLO+(freqNo*7./16.)*1e6;
     case 12:                                                       /* GLOL3X  */
-        return FREQ3_GLO;
+        return 1.202025*1e9;
     case 15:                                                       /* IRNSSL5  */
         return FREQ5;
+    case 16:                                                       /* GALL1A  */
+        return FREQ1;
     case 17:                                                       /* GALL1BC */
         return FREQ1;
+    case 18:                                                       /* GALE6A  */
+        return FREQ6;
     case 19:                                                       /* GALE6BC */
         return FREQ6;
     case 20:                                                       /* GALE5a  */
@@ -564,6 +568,17 @@ static double getSigFreq(int _signType, int freqNo){
         return FREQ3_CMP;
     }
     return FREQ1;
+}
+
+/* adjust weekly rollover of gps time ----------------------------------------*/
+static gtime_t adjweek(gtime_t time, double tow)
+{
+    double tow_p;
+    int week;
+    tow_p=time2gpst(time,&week);
+    if      (tow<tow_p-302400.0) tow+=604800.0;
+    else if (tow>tow_p+302400.0) tow-=604800.0;
+    return gpst2time(week,tow);
 }
 
 /* return the Septentrio signal type -----------------------------------------*/
@@ -611,8 +626,14 @@ static int getSignalCode(int signType){
     case 15:                                                       /* IRNSSL5  */
         _code=CODE_L5A;
         break;
+    case 16:                                                       /* GALE1A  */
+        _code=CODE_L1A;
+        break;
     case 17:                                                       /* GALE1BC */
         _code=CODE_L1C;
+        break;
+    case 18:                                                       /* GALE6A  */
+        _code=CODE_L6A;
         break;
     case 19:                                                       /* GALE6BC */
         _code=CODE_L6C;
@@ -845,7 +866,7 @@ static int decode_galnav(raw_t *raw){
 
     tow        = U4(puiTmp +  2);
     eph.week   = U2(puiTmp +  6); /* GAL week number */
-    eph.code   = U1(puiTmp +  9); /* 2:INAV,16:FNAV */
+    eph.code   = U1(puiTmp +  9)==2?0:1; /* 0:INAV,1:FNAV */
     eph.A      = pow(R8(puiTmp +  10), 2);
     eph.M0     = R8(puiTmp +  18) * PI;
     eph.e      = R8(puiTmp +  26);
@@ -868,9 +889,9 @@ static int decode_galnav(raw_t *raw){
     eph.f0     = R8(puiTmp + 110);
     week_oe    = U2(puiTmp + 118); /* WNt_oc */
     week_oc    = U2(puiTmp + 120);
-    eph.iode   = U2(puiTmp + 122);
-    eph.iodc   = 0;
-    if (eph.code==2) /* INAV */
+    eph.iode   =
+    eph.iodc   = U2(puiTmp + 122);
+    if (eph.code==0) /* INAV */
     {
         eph.sva    = U1(puiTmp + 128);
         eph.svh    = (U2(puiTmp + 124)& 0x00ff)^0x0011;
