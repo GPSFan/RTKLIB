@@ -1,3 +1,29 @@
+This is a fork of two forks. Does that make it a spoon?
+
+No, "There is no spoon".
+
+The original being Windoze centric for the GUI, I took the best of Jens Reimann's Qt port
+and the best of Tim Everett's RTKExplorer Demo5 enhancements to Tomoji Takasu's 2.4.3 b27 branch
+and combined them into this repo. 
+As I have neither capability nor desire to rebuild the Windoze GUI code, don't rely on this repo for that, use
+RTKExplorer. There is nothing in the RTKLIB part of this repo that isn't in RtkExplorer.
+If you need a pure Qt port of Tomoji Takasu's original, use Jens's repo.
+Other repo's like emlid's, drotek's and some 400 others,... you are on your own, good luck.
+
+If you need a Qt port of RTKExplorer, you have come to the right place.
+You do not need any sort of propritary compiler to build the Qt stuff. Just Qt Creator.
+But, it won't build the original's Windoze Gui .exe files. I've tried to maintain their
+integrity (RTKExplorer wise that is), but no guarantees, and for that you will need the
+Embarcadero C++ Builder that you have to pay for.
+
+Many of my commit messages attribute to me. That's because of the way I updated the code. I also
+cherry picked a lot of commits which did retain their attributions. Most of what I committed
+should be attributable to either Tim or Jens.
+
+I've also removed the building of rtkvideo_qt and rtkvplayer_qt as I was never able to get my Qt install
+to have the right multimedia stuff. The code is still there and maintained as is Jens', I just
+don't build them.
+
 #
 #  RTKLIB 2.4.3 Betas
 #
