@@ -19,6 +19,9 @@ win* {
 CONFIG += staticlib
 }
 
+CONFIG += staticlib
+
+
 SOURCES += src_c/cal2jd.c\
 	   src_c/dat.c \
 	   src_c/dehanttideinel.c \
