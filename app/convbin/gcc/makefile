@@ -18,7 +18,7 @@ all  : convbin
 convbin    : convbin.o rtkcmn.o rinex.o sbas.o preceph.o rcvraw.o convrnx.o
 convbin    : rtcm.o rtcm2.o rtcm3.o rtcm3e.o pntpos.o ephemeris.o ionex.o
 convbin    : novatel.o ss2.o ublox.o crescent.o skytraq.o gw10.o javad.o nvs.o
-convbin    : binex.o rt17.o qzslex.o septentrio.o cmr.o
+convbin    : binex.o rt17.o qzslex.o tersus.o septentrio.o cmr.o
 
 convbin.o  : ../convbin.c
 	$(CC) -c $(CFLAGS) ../convbin.c
@@ -72,6 +72,8 @@ qzslex.o   : $(SRC)/qzslex.c
 	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
 septentrio.o: $(SRC)/rcv/septentrio.c
 	$(CC) -c $(CFLAGS) $(SRC)/rcv/septentrio.c
+tersus.o: $(SRC)/rcv/tersus.c
+	$(CC) -c $(CFLAGS) $(SRC)/rcv/tersus.c
 cmr.o      : $(SRC)/rcv/cmr.c
 	$(CC) -c $(CFLAGS) $(SRC)/rcv/cmr.c
 
@@ -101,6 +103,7 @@ binex.o    : $(SRC)/rtklib.h
 rt17.o     : $(SRC)/rtklib.h
 qzslex.o   : $(SRC)/rtklib.h
 septentrio.o: $(SRC)/rtklib.h
+tersus.o: $(SRC)/rtklib.h
 cmr.o      : $(SRC)/rtklib.h
 
 DATDIR = ../../../test/data/rcvraw
