@@ -11,31 +11,41 @@ TEMPLATE = lib
 
 include(../../RTKLib.pri)
 
-*g++* {
-QMAKE_FLAGS += -O3 -ffixed-line-length-132
-}
-
-win* {
-CONFIG += staticlib
-}
+FORTRAN_FLAGS += -O3 -ffixed-line-length-132
 
 CONFIG += staticlib
 
+gfortran.commands = gfortran $${FORTRAN_FLAGS} ${QMAKE_FILE_NAME} -c -o ${QMAKE_FILE_OUT}
+gfortran.input = FORTRAN_SOURCE
+gfortran.output = /${QMAKE_FILE_BASE}.o
+gfortran.CONFIG = target_predeps
 
-SOURCES += src_c/cal2jd.c\
-	   src_c/dat.c \
-	   src_c/dehanttideinel.c \
-	   src_c/gmf.c \
-	   src_c/gpt.c \
-	   src_c/norm8.c \ 
-	   src_c/sprod.c \
-	   src_c/st1idiu.c \
-           src_c/st1isem.c \
-	   src_c/st1l1.c \
-	   src_c/step2diu.c \
-	   src_c/step2lon.c \
-	   src_c/vmf1.c \
-	   src_c/vmf1_ht.c \
-	   src_c/zero_vec8.c
+# the only change required I guess
+gfortran.variable_out = FORTRAN_OBJ
+
+QMAKE_EXTRA_COMPILERS += gfortran 
+
+archive.commands = ar -qsc ${QMAKE_FILE_OUT} $${FORTRAN_OBJ}
+archive.input = FORTRAN_OBJ
+# I suggest to use $$OUT_PWD here
+archive.output = libiers.a
+archive.CONFIG = combine target_predeps
+QMAKE_EXTRA_COMPILERS += archive
+
+SOURCES += src/cal2jd.f\
+	   src/dat.f \
+	   src/dehanttideinel.f \
+	   src/gmf.f \
+	   src/gpt.f \
+	   src/norm8.f \ 
+	   src/sprod.f \
+	   src/st1idiu.f \
+           src/st1isem.f \
+	   src/st1l1.f \
+	   src/step2diu.f \
+	   src/step2lon.f \
+	   src/vmf1.f \
+	   src/vmf1_ht.f \
+	   src/zero_vec8.f
 
 DESTDIR = ..

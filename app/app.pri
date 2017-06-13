@@ -5,7 +5,7 @@ ROOT_DIRECTORY = $${PWD}/../
 OUTPUT_DIRECTORY = $${OUT_PWD}
 
 LIBS += -L$${ROOT_DIRECTORY}/lib/ -lRTKLib
-LIBS += -liers -lf2c
+LIBS += -liers -lgfortran
 
 win* {
     LIBS += -lWs2_32 -lwinmm
