@@ -200,7 +200,7 @@ void Plot::DrawTrk(QPainter &c, int level)
             GraphT->DrawMark(c, p1, 0, MColor[1][pos->q[0]], MarkSize * 2 + 4, 0);
 
             if (BtnSol1->isChecked()) {
-                p1.setX(p1.x() + MarkSize + 8);
+                p1.setX(p1.rx() + MarkSize + 8);
                 DrawLabel(GraphT, c, p1, "2", 1, 0);
             }
         }
